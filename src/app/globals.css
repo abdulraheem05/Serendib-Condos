@@ -1,0 +1,329 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Supplied fonts (self-hosted from /public/assets/fonts)
+   - Ringle (primary display): Bold 700, Medium 500, Italic 400
+   - Google Sans (secondary / UI): the supplied Medium file serves 400–500,
+     the supplied Bold file serves 600–700. (A Regular file was not in the ZIP.)
+------------------------------------------------------------------- */
+@font-face {
+  font-family: "Ringle";
+  src: url("/assets/fonts/ringle/Ringle-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ringle";
+  src: url("/assets/fonts/ringle/Ringle-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ringle";
+  src: url("/assets/fonts/ringle/Ringle-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Google Sans";
+  src: url("/assets/fonts/google-sans/GoogleSans-Medium.latin.woff") format("woff");
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Google Sans";
+  src: url("/assets/fonts/google-sans/GoogleSans-Bold.latin.woff") format("woff");
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ------------------------------------------------------------------
+   Design tokens – the three brand colours are exact.
+   Tints (paper / paper-deep) are derived from gold + white, never new hues.
+------------------------------------------------------------------- */
+@theme {
+  --color-brand-navy: #0d1c31;
+  --color-brand-gold: #c9a66b;
+  --color-brand-white: #ffffff;
+  --color-paper: color-mix(in srgb, #c9a66b 14%, #ffffff);
+  --color-paper-deep: color-mix(in srgb, #c9a66b 28%, #ffffff);
+
+  --font-display: "Ringle", "Times New Roman", serif;
+  --font-sans: "Google Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --ease-cine: cubic-bezier(0.22, 0.8, 0.2, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-brand-navy);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-brand-gold);
+    color: var(--color-brand-navy);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  button {
+    cursor: pointer;
+  }
+  img {
+    -webkit-user-drag: none;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    padding: 0.7rem 1.35rem;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    transition:
+      background-color 0.35s var(--ease-cine),
+      color 0.35s var(--ease-cine),
+      border-color 0.35s var(--ease-cine),
+      transform 0.35s var(--ease-cine);
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-gold {
+    background: var(--color-brand-gold);
+    color: var(--color-brand-navy);
+  }
+  .btn-gold:hover {
+    background: var(--color-brand-white);
+  }
+  .btn-paper {
+    background: var(--color-paper);
+    color: var(--color-brand-navy);
+  }
+  .btn-paper:hover {
+    background: var(--color-brand-gold);
+  }
+  .btn-navy {
+    background: var(--color-brand-navy);
+    color: var(--color-brand-white);
+  }
+  .btn-navy:hover {
+    background: var(--color-brand-gold);
+    color: var(--color-brand-navy);
+  }
+  .btn-ghost {
+    border-color: color-mix(in srgb, currentColor 45%, transparent);
+    color: inherit;
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-brand-gold);
+    background: color-mix(in srgb, var(--color-brand-gold) 16%, transparent);
+  }
+
+  .field {
+    width: 100%;
+    appearance: none;
+    background-color: color-mix(in srgb, var(--color-brand-white) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-brand-white) 22%, transparent);
+    border-radius: 0.5rem;
+    color: var(--color-brand-white);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    min-height: 2.75rem;
+    padding: 0.6rem 2.25rem 0.6rem 0.85rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%23C9A66B' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    transition: border-color 0.3s var(--ease-cine);
+  }
+  .field:hover {
+    border-color: var(--color-brand-gold);
+  }
+  .field option {
+    color: var(--color-brand-navy);
+    background: var(--color-brand-white);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Motion primitives (CSS-driven interaction states).
+   Scroll storytelling lives in GSAP – see src/hooks/useScrollAnimations.js
+------------------------------------------------------------------- */
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes panel-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+}
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes sheet-out {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+@keyframes view-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes img-in {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.anim-panel-in {
+  animation: panel-in 0.55s var(--ease-cine) both;
+}
+.anim-panel-out {
+  animation: panel-out 0.28s var(--ease-cine) both;
+}
+.anim-view-in {
+  animation: view-in 0.55s var(--ease-cine) both;
+}
+.anim-fade-in {
+  animation: fade-in 0.5s var(--ease-cine) both;
+}
+.anim-img-in {
+  animation: img-in 0.8s var(--ease-cine) both;
+}
+.anim-pulse-ring {
+  animation: pulse-ring 2.2s ease-out infinite;
+}
+
+/* Below xl the detail card is a bottom sheet; at xl it is an in-flow column. */
+@media (max-width: 1279.98px) {
+  .anim-panel-in {
+    animation-name: sheet-in;
+    animation-duration: 0.5s;
+  }
+  .anim-panel-out {
+    animation-name: sheet-out;
+    animation-duration: 0.3s;
+  }
+}
+
+/* Hide scrollbars on horizontal rails while keeping them scrollable */
+.rail-scroll {
+  scrollbar-width: none;
+}
+.rail-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes marker-in {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.anim-marker-in {
+  animation: marker-in 0.6s var(--ease-cine) both;
+}
