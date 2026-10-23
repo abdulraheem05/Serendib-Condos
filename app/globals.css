@@ -281,6 +281,10 @@ nav > a.active:not(.button) {
   padding: 50px 52px 98px;
   max-width: 710px;
 }
+
+.hero-content h1{
+  font-size: 30px;
+}
 .eyebrow {
   font-size: 10px;
   letter-spacing: 0.18em;
@@ -296,6 +300,7 @@ h1 em {
   font-family: Montserrat, "Segoe UI", Arial, sans-serif;
   font-weight: 400;
   color: #e8d2a6;
+  
 }
 .hero-content p:not(.eyebrow) {
   color: #e0e8e7;
@@ -962,9 +967,14 @@ footer a:hover {
 
 /* Scrollable options */
 .custom-dropdown-options {
-  display: grid;
+  display: block;
+  max-height: min(260px, 40dvh);
   gap: 5px;
   max-height: 260px;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
@@ -982,6 +992,8 @@ footer a:hover {
   border-radius: 13px;
   background: transparent;
   color: #344640;
+  margin-bottom: 5px;
+  box-sizing: border-box;
   text-align: left;
   font-size: 12px;
   font-weight: 400;
@@ -1417,6 +1429,15 @@ dialog[open]:not(.enquiry-dialog)::backdrop {
   }
 }
 @media (max-width: 420px) {
+  h1 {
+    font-size: clamp(28px, 7.5vw, 32px);
+    line-height: 1.15;
+  }
+
+  .hero-content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   .grid-mode .project-list {
     grid-template-columns: 1fr;
   }

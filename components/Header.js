@@ -40,12 +40,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="topline">
-        <div className="container">
-          A bridge between Canada and Sri Lanka
-          <span>Property guidance, wherever you call home.</span>
-        </div>
-      </div>
+
 
       <header className="header" ref={header}>
         <div className="container nav-shell">

@@ -49,9 +49,7 @@ export default function Home() {
           />
 
           <Reveal className="hero-content">
-            <p className="eyebrow light">
-              Rooted in Sri Lanka. Connected to you.
-            </p>
+
             <h1 id="home-title">
               A place to call home.
               <br />A connection to <em>Sri Lanka.</em>
