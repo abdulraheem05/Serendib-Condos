@@ -1,11 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    // All imagery is local (public/assets/images). If you later add remote photography,
-    // allow its host here, e.g. remotePatterns: [{ protocol: "https", hostname: "images.example.com" }]
-    formats: ["image/avif", "image/webp"],
+  poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        ],
+      },
+    ];
   },
 };
-
 export default nextConfig;

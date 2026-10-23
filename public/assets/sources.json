@@ -1,0 +1,71 @@
+{
+  "hero": {
+    "source": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d",
+    "download": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=85",
+    "license": "https://unsplash.com/license",
+    "usage": "Illustrative stock interior; not an actual listing photo"
+  },
+  "aurora": {
+    "source": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0",
+    "download": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",
+    "license": "https://unsplash.com/license",
+    "usage": "Illustrative stock interior; not an actual listing photo"
+  },
+  "coastline": {
+    "source": "https://images.unsplash.com/photo-1613977257363-707ba9348227",
+    "download": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=900&q=85",
+    "license": "https://unsplash.com/license",
+    "usage": "Illustrative stock interior; not an actual listing photo"
+  },
+  "skyline": {
+    "source": "https://images.unsplash.com/photo-1556912172-45b7abe8b7e1",
+    "download": "https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=900&q=85",
+    "license": "https://unsplash.com/license",
+    "usage": "Illustrative stock interior; not an actual listing photo"
+  },
+  "garden": {
+    "source": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea",
+    "download": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85",
+    "license": "https://unsplash.com/license",
+    "usage": "Illustrative stock interior; not an actual listing photo"
+  },
+  "harbour": {
+    "source": "https://images.unsplash.com/photo-1615874959474-d609969a20ed",
+    "download": "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=900&q=85",
+    "license": "https://unsplash.com/license",
+    "usage": "Illustrative stock interior; not an actual listing photo"
+  },
+  "lake": {
+    "source": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
+    "download": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85",
+    "license": "https://unsplash.com/license",
+    "usage": "Illustrative stock interior; not an actual listing photo"
+  },
+  "colombo": {
+    "source": "User-supplied city photograph from Website changes.zip",
+    "license": "Provided by site owner; retain original permissions."
+  },
+  "galle": {
+    "source": "User-supplied city photograph from Website changes.zip",
+    "license": "Provided by site owner; retain original permissions."
+  },
+  "negombo": {
+    "source": "User-supplied city photograph from Website changes.zip",
+    "license": "Provided by site owner; retain original permissions."
+  },
+  "kandy": {
+    "source": "User-supplied city photograph from Website changes.zip",
+    "license": "Provided by site owner; retain original permissions."
+  },
+  "jaffna": {
+    "source": "https://unsplash.com/photos/green-grass-field-under-blue-sky-during-daytime-Z3XO2B2Db7Q",
+    "download": "https://images.unsplash.com/photo-1591410448119-1b49cbb3b83e?auto=format&fit=crop&w=800&q=85",
+    "license": "https://unsplash.com/license",
+    "author": "Eshan Malaviarachchi",
+    "usage": "Actual Jaffna destination photograph; not a development listing"
+  },
+  "nuwara-eliya": {
+    "source": "User-supplied city photograph from Website changes.zip",
+    "license": "Provided by site owner; retain original permissions."
+  }
+}
