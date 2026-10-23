@@ -1,7 +1,16 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useCallback, useMemo, useRef, useState } from "react";
-import { Map, LayoutGrid, RotateCcw } from "lucide-react";
+import { useEffect, useCallback, useMemo, useRef, useState } from "react";
+import {
+  Map,
+  LayoutGrid,
+  RotateCcw,
+  ChevronDown,
+  Search,
+  MapPin,
+  Check,
+  X,
+} from "lucide-react";
 import { site } from "@/lib/data";
 import { filterProjects } from "@/lib/projects";
 import ProjectCard from "./ProjectCard";
@@ -17,6 +26,160 @@ const PropertyMap = dynamic(() => import("./PropertyMap"), {
     </div>
   ),
 });
+
+
+function CustomDropdown({
+  label,
+  value,
+  options,
+  onChange,
+  searchable = false,
+  placeholder = "Search...",
+}) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const wrapperRef = useRef(null);
+  const searchRef = useRef(null);
+
+  const selected = options.find((option) => option.value === value);
+
+  const filteredOptions = options.filter((option) =>
+    option.label.toLowerCase().includes(query.toLowerCase()),
+  );
+
+  useEffect(() => {
+    function handleOutsideClick(event) {
+      if (!wrapperRef.current?.contains(event.target)) {
+        setOpen(false);
+        setQuery("");
+      }
+    }
+
+    function handleEscape(event) {
+      if (event.key === "Escape") {
+        setOpen(false);
+        setQuery("");
+      }
+    }
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (open && searchable) {
+      requestAnimationFrame(() => searchRef.current?.focus());
+    }
+  }, [open, searchable]);
+
+  function chooseOption(option) {
+    onChange(option.value);
+    setOpen(false);
+    setQuery("");
+  }
+
+  return (
+    <div className="custom-dropdown-field">
+      <span className="custom-dropdown-label">{label}</span>
+
+      <div
+        className={`custom-dropdown ${open ? "is-open" : ""}`}
+        ref={wrapperRef}
+      >
+        <button
+          type="button"
+          className="custom-dropdown-trigger"
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          onClick={() => setOpen((current) => !current)}
+        >
+          <span>{selected?.label ?? options[0]?.label}</span>
+          <ChevronDown
+            size={16}
+            className="custom-dropdown-chevron"
+            aria-hidden="true"
+          />
+        </button>
+
+        {open && (
+          <div className="custom-dropdown-menu">
+            {searchable && (
+              <div className="custom-dropdown-search">
+                <Search size={16} aria-hidden="true" />
+                <input
+                  ref={searchRef}
+                  type="search"
+                  value={query}
+                  placeholder={placeholder}
+                  aria-label={`Search ${label}`}
+                  onChange={(event) => setQuery(event.target.value)}
+                />
+                {query && (
+                  <button
+                    type="button"
+                    aria-label="Clear search"
+                    onClick={() => setQuery("")}
+                  >
+                    <X size={15} />
+                  </button>
+                )}
+              </div>
+            )}
+
+            <div className="custom-dropdown-options" role="listbox" aria-label={label}>
+              {filteredOptions.map((option) => {
+                const active = option.value === value;
+
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    role="option"
+                    aria-selected={active}
+                    className={`custom-dropdown-option ${
+                      active ? "selected" : ""
+                    }`}
+                    onClick={() => chooseOption(option)}
+                  >
+                    {searchable && (
+                      <MapPin
+                        size={16}
+                        className="custom-dropdown-pin"
+                        aria-hidden="true"
+                      />
+                    )}
+
+                    <span>{option.label}</span>
+
+                    {active && (
+                      <Check
+                        size={16}
+                        className="custom-dropdown-check"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </button>
+                );
+              })}
+
+              {filteredOptions.length === 0 && (
+                <p className="custom-dropdown-empty">
+                  No matching options found.
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Explorer() {
   const [city, setCity] = useState("all"),
     [stage, setStage] = useState("all"),
@@ -122,45 +285,46 @@ export default function Explorer() {
             onSubmit={(e) => e.preventDefault()}
             onReset={reset}
           >
-            <label htmlFor="city">
-              City
-              <select
-                id="city"
-                value={city}
-                onChange={(e) => update(setCity, e.target.value)}
-              >
-                <option value="all">All Sri Lanka</option>
-                {Object.keys(site.cities).map((c) => (
-                  <option key={c}>{c}</option>
-                ))}
-              </select>
-            </label>
-            <label htmlFor="stage">
-              Project stage
-              <select
-                id="stage"
-                value={stage}
-                onChange={(e) => update(setStage, e.target.value)}
-              >
-                <option value="all">All stages</option>
-                <option value="upcoming">Upcoming</option>
-                <option value="ongoing">Ongoing</option>
-                <option value="completed">Completed</option>
-              </select>
-            </label>
-            <label htmlFor="bedrooms">
-              Bedrooms
-              <select
-                id="bedrooms"
-                value={bedrooms}
-                onChange={(e) => update(setBedrooms, e.target.value)}
-              >
-                <option value="all">Any bedrooms</option>
-                <option value="1">1 bedroom</option>
-                <option value="2">2 bedrooms</option>
-                <option value="3">3+ bedrooms</option>
-              </select>
-            </label>
+            
+            <CustomDropdown
+              label="City"
+              value={city}
+              searchable
+              placeholder="Search cities..."
+              onChange={(value) => update(setCity, value)}
+              options={[
+                { value: "all", label: "All Sri Lanka" },
+                ...Object.keys(site.cities).map((name) => ({
+                  value: name,
+                  label: name,
+                })),
+              ]}
+            />
+
+            <CustomDropdown
+              label="Project stage"
+              value={stage}
+              onChange={(value) => update(setStage, value)}
+              options={[
+                { value: "all", label: "All stages" },
+                { value: "upcoming", label: "Upcoming" },
+                { value: "ongoing", label: "Ongoing" },
+                { value: "completed", label: "Completed" },
+              ]}
+            />
+
+            <CustomDropdown
+              label="Bedrooms"
+              value={bedrooms}
+              onChange={(value) => update(setBedrooms, value)}
+              options={[
+                { value: "all", label: "Any bedrooms" },
+                { value: "1", label: "1 bedroom" },
+                { value: "2", label: "2 bedrooms" },
+                { value: "3", label: "3+ bedrooms" },
+              ]}
+            />
+
             <button
               type="reset"
               className="reset inline-flex items-center justify-center gap-2"

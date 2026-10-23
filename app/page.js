@@ -8,6 +8,7 @@ import Explorer from "@/components/Explorer";
 import Reveal from "@/components/Reveal";
 import { site } from "@/lib/data";
 import EnquiryButton from "@/components/EnquiryButton";
+import SmoothScroll from "@/components/SmoothScroll";
 import { emailLink } from "@/lib/projects";
 
 function scrollToSection(event, sectionId) {
@@ -21,6 +22,7 @@ function scrollToSection(event, sectionId) {
 export default function Home() {
   return (
     <>
+      <SmoothScroll />
       <a
         className="skip"
         href="#main"
@@ -185,21 +187,9 @@ export default function Home() {
 
       <footer>
         <div className="container footer-inner">
-          <a
-            href="#home"
-            className="footer-name"
-            onClick={(event) => scrollToSection(event, "home")}
-          >
-            SERENDIB <span>CONDOS</span>
-          </a>
+          
           <p>© {new Date().getFullYear()} Serendib Condos</p>
-          <a href="/assets/sources.json">Photo credits</a>
-          <a
-            href="#home"
-            onClick={(event) => scrollToSection(event, "home")}
-          >
-            Back to top ↑
-          </a>
+          
         </div>
       </footer>
     </>
